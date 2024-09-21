@@ -1,0 +1,15 @@
+const express=require("express")
+const PORT=process.env.PORT||4000
+require("dotenv").config()
+const cookieParser=require("cookie-parser")
+const connectDB=require("./dbconfig/DBconnect")
+const apiRouter=require("./routes")
+const app=express()
+connectDB()
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+app.use(cookieParser())
+app.use("/api",apiRouter)
+app.listen(PORT,()=>{
+    console.log(`server was started on ${PORT} PORT`)
+})
